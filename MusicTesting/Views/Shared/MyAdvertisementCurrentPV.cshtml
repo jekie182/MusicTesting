@@ -1,0 +1,335 @@
+﻿@using MusicTesting.Models.ViewModel;
+@model CurrentMyAdvertisement
+
+
+
+<style type="text/css">
+.thumbnail{
+/*position: relative;*/
+z-index: 0;
+}
+
+.thumbnail:hover{
+background-color: transparent;
+z-index: 50;
+}
+
+.thumbnail span{ /*CSS for enlarged image*/
+position: absolute;
+background-color: lightyellow;
+padding: 5px;
+top:-280px;
+border: 1px dashed gray;
+visibility: hidden;
+color: black;
+text-decoration: none;
+}
+
+.thumbnail span img{ /*CSS for enlarged image*/
+border-width: 0;
+padding: 2px;
+}
+
+.thumbnail:hover span{ /*CSS for enlarged image on hover*/
+visibility: visible;
+top:-280px;
+left: 0px; /*position where enlarged image should offset horizontally */
+
+}
+
+label.myLabel input[type="file"] {
+    position: fixed;
+    top: -1000px;
+}
+
+/***** Example custom styling *****/
+.myLabel {
+}
+.myLabel:hover {
+
+}
+.myLabel:active {
+    width :33px;
+}
+.myLabel :invalid + span {
+   
+}
+.myLabel :valid + span {
+    
+}
+
+
+
+</style>
+<div id="currentAdvertisement">
+    <script src="~/Content/js/gallery.js"></script>
+    <script>
+        function submitUpdateData()
+        {
+            var form = $('#formRecive');
+            $.ajax({
+                cache: false,
+                async: true,
+                type: "POST",
+                url: form.attr('action'),
+                data: form.serialize(),  
+                success: function (data) {
+                    hideTheForm();
+                }
+            });
+        }
+
+        function deleteImage(imgId, advertisementId)
+        {
+            if(imgId!= null && advertisementId != null)
+            {
+                var r = confirm("Видалити запис?");
+                if (r == true) {
+                    removeImage(imgId.split("_")[1], advertisementId);
+                    $('#'+ imgId).remove();
+                } else {
+                    return false;  
+                }
+            }
+        }
+        function removeImage(id, adv)
+        {
+            $.ajax({
+                url: '@Url.Action("DeleteImageFromMyAdvertisement", "Index")',
+                type: 'post',
+                cache: false,
+                async: true,
+                data: { advertisementId:  adv, fileId: id },
+                success: function (result) {
+                    debugger;
+                }
+            });
+        }
+
+        function previewFile(file) {
+            debugger;
+            var form = $('#AddImageFromMyAdvertisement');
+            $.ajax({
+                cache: false,
+                async: true,
+                type: "POST",
+                enctype: 'multipart/form-data',
+                url: form.attr('action'),
+                data: {advertisementId: $('#advertisementIdhidden').val(),
+                    file: file
+                },
+                success: function (data) {
+                    debugger;
+                    if(data)
+                    {
+                        var preview = document.querySelector('img');
+                        var file    = document.querySelector('input[type=file]').files[0];
+                        var reader  = new FileReader();
+
+                        reader.addEventListener("load", function () {
+                            preview.src = reader.result;
+                        }, false);
+
+                        if (file) {
+                            reader.readAsDataURL(file);
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+    <div id="formcontainer">
+        <form method="post" action="@Url.Action("UpdateCurrentMyAdvetrisement", "Index")" enctype="multipart/form-data"
+              autocomplete="on" id="formRecive" class="formRecive">
+            <h2>Режим редагування оголошення</h2>
+            <fieldset>
+                <div class="form-style-5">
+                        <fieldset>
+                            <legend><span class="number">1</span> Контактні дані</legend>
+                            <input type="hidden" name="advertisementId" value="@Model.Id">
+                            <input type="text" name="phoneNumber" value = "@Model.PhoneNumber" placeholder="Номер телефону *">
+                            <input type="email" name="email"  value="@Model.Email" placeholder="Едектронна адреса *">
+                         
+                            <legend><span class="number">2</span> Дані про оголошення</legend>
+                            <input type="text" name="header" value="@Model.Header" placeholder="Заголовок *">
+                            <select id="paragraph" name="paragraph">
+                                <optgroup label="Розділи"> 
+                                </optgroup>
+                            </select>
+                            <script>
+                                try{
+                                    $.ajax({
+                                        type: "POST",
+                                        url: '@Url.Action("GetParagraphLookUpData", "LookUpData")',
+                                        data: {},
+                                        contentType: "application/json; charset=utf-8",
+                                        dataType: "json", // dataType is json format
+                                        success: OnSuccess
+                                    });
+                                    function OnSuccess(response)
+                                    {
+                                        var paragraph = document.getElementById('paragraph')
+                                        if(paragraph!= null)
+                                        {
+                                            for (var i = 0; i < response.length; i++) {
+                                                var opt = document.createElement('option');
+                                                opt.value = response[i].Id;
+                                                opt.innerHTML = response[i].Name;
+                                                paragraph.appendChild(opt);
+                                                if(@Model.ParagraphId == response[i].Id)
+                                                {
+                                                    paragraph.options[i].selected = true;
+                                                }
+                                            }
+
+                                        }
+                                    }
+                                }catch(err) { }
+                            </script>
+
+                            <textarea name="advertisementBody" id="advertisementBody" value ="@Model.AdvertisementBody"  placeholder="Опис"></textarea>
+                            <script>
+                                document.getElementById('advertisementBody').value = '@Model.AdvertisementBody';
+                            </script>
+                            <legend><span class="number">3</span> Адреса</legend>
+                            <select id="country" name="country">
+                                <optgroup label="список країн">
+                                </optgroup>
+                            </select>
+                            <script>
+                                $.ajax({
+                                    type: "POST",
+                                    url: '@Url.Action("GetCountryLookUpData", "LookUpData")',
+                                    data: {},
+                                    contentType: "application/json; charset=utf-8",
+                                    dataType: "json", // dataType is json format
+                                    success: OnSuccess
+                                });
+                                function OnSuccess(response)
+                                {
+                                    var paragraph = document.getElementById('country')
+                                    if(paragraph!= null)
+                                    {
+                                        for (var i = 0; i < response.length; i++) {
+                                            var opt = document.createElement('option');
+                                            opt.value = response[i].Id;
+                                            opt.innerHTML = response[i].Name;
+                                            paragraph.appendChild(opt);
+                                            if(@Model.CountryId == response[i].Id)
+                                            {
+                                                paragraph.options[i].selected = true;
+                                            }
+                                        }
+                                    }
+                                }
+                            </script>
+
+
+                            <select id="city" name="city">
+                                <optgroup label="список міст">
+                                </optgroup>
+                            </select>
+                            <script>
+                                $.ajax({
+                                    type: "POST",
+                                    url: '@Url.Action("GetCityLookUpData", "LookUpData")',
+                                    data: {},
+                                    contentType: "application/json; charset=utf-8",
+                                    dataType: "json", // dataType is json format
+                                    success: OnSuccess
+                                });
+                                function OnSuccess(response)
+                                {
+                                    var paragraph = document.getElementById('city')
+                                    if(paragraph!= null)
+                                    {
+                                        for (var i = 0; i < response.length; i++) {
+                                            var opt = document.createElement('option');
+                                            opt.value = response[i].Id;
+                                            opt.innerHTML = response[i].Name;
+                                            paragraph.appendChild(opt);
+                                            if(@Model.CityId == response[i].Id)
+                                            {
+                                                paragraph.options[i].selected = true;
+                                            }
+                                        }
+                                    }
+                                }
+                            </script>
+
+                            <select id="street" name="street">
+                                <optgroup label="список вулиць">
+                                </optgroup>
+                            </select>
+                            <script>
+                                $.ajax({
+                                    type: "POST",
+                                    url: '@Url.Action("GetStreetLookUpData", "LookUpData")',
+                                    data: {},
+                                    contentType: "application/json; charset=utf-8",
+                                    dataType: "json", // dataType is json format
+                                    success: OnSuccess
+                                });
+                                function OnSuccess(response)
+                                {
+                                    var paragraph = document.getElementById('street')
+                                    if(paragraph!= null)
+                                    {
+                                        for (var i = 0; i < response.length; i++) {
+                                            var opt = document.createElement('option');
+                                            opt.value = response[i].Id;
+                                            opt.innerHTML = response[i].Name;
+                                            paragraph.appendChild(opt);
+                                            if(@Model.StreetId == response[i].Id)
+                                            {
+                                                paragraph.options[i].selected = true;
+                                            }
+                                        }
+                                    }
+                                }
+                            </script>
+
+                        </fieldset>
+                        <fieldset>
+                            <legend><span class="number">4</span> Примітка до адреси</legend>
+                            <textarea name="adressText" id="adressText" value ="@Model.AdressBody" placeholder="..."></textarea>
+                            <script>
+                                document.getElementById('adressText').value = '@Model.AdressBody';
+                            </script>
+                        </fieldset>
+                </div>
+            </fieldset>
+            <fieldset class="buttons" style="margin-left: 490px; margin-top:50px;">
+                <input type="image"
+                       alt="Cancel"
+                       src="~/Content/images/myadvertisement/button_cancel.png"
+                       onclick="hideTheForm();return false;" class="tilt" />
+                <input type="image"
+                       alt="Submit"
+                       src="~/Content/images/myadvertisement/button_submit.png"
+                       onclick="submitUpdateData();" class="tilt" />
+            </fieldset>
+        </form>
+
+
+
+
+        @using (Ajax.BeginForm(new AjaxOptions {
+                    UpdateTargetId = "currentAdvertisementImageViewver",InsertionMode =InsertionMode.InsertAfter,
+                    Url = Url.Action("AddImageCurrentMyAdvertisement", "Store"),
+                    HttpMethod = "POST"}))
+        {
+            <label class="myLabel" style="float: right; padding-bottom: 0px;position: absolute; bottom: -70px;right: 90px;">
+                <input type="file" id="fileUpload" name="fileUpload" onchange="this.form.submit()" />
+                <input type="hidden" value="@Model.Id" name="advertisementId" id="advertisementIdhidden">
+                <span>
+                    <img src="~/Content/images/upload-image-icon.png" class="tilt" />
+                </span>
+            </label>
+        }
+        <div id="currentAdvertisementImageViewver">
+            @Html.Action("GetCurrentMyAdvertisementImage", "Store", new { area = "", fileDir = @Model.Files, id = @Model.Id })
+        </div>
+    </div>
+   
+</div>

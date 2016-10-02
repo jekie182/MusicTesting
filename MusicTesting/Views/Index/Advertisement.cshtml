@@ -1,0 +1,207 @@
+﻿@{ 
+    ViewBag.Title = "Advertisement";
+}
+@using MusicTesting.Models.ViewModel;
+@model AdvertisementView
+
+
+<div class="w3-container w3-section w3-animate-opacity">
+    <div class="w3-tag w3-jumbo">О</div>
+    <div class="w3-tag w3-jumbo">Г</div>
+    <div class="w3-tag w3-jumbo">О</div>
+    <div class="w3-tag w3-jumbo">Л</div>
+    <div class="w3-tag w3-jumbo">О</div>
+    <div class="w3-tag w3-jumbo">Ш</div>
+    <div class="w3-tag w3-jumbo">Е</div>
+    <div class="w3-tag w3-jumbo">Н</div>
+    <div class="w3-tag w3-jumbo">Н</div>
+    <div class="w3-tag w3-jumbo">Я</div>
+</div>
+
+<div class="w3-row-padding">
+
+    <div class="w3-third" style ="width: 100%;">
+        <div class="w3-card">
+            <div class="w3-container w3-red">
+                <h1><b>№ @Model.Id, від: @Model.PostedDate </b></h1>
+            </div>
+            <div class="w3-container w3-xlarge">
+                <p style="margin-bottom:10px;">
+                    @Model.Header<br>
+                    <i><b>@Model.AdvertisementBody</b></i><br>
+                    <span class="w3-xxlarge w3-text-red"><b>
+                        
+                        </b></span>
+                </p>
+                <p style="margin-bottom:10px;">
+                    <del></del> <span class="w3-tag w3-yellow">В розділі: @Model.Paragraph </span><br>
+                    @{
+                        if (Model.AuthorName == "" && Model.AuthorLastName == "")
+                        {
+                            <a class="header-span" href="/Index/FindAuthorAnonymus/@Model.Id">
+                                Розміщено: анонімно
+                            </a>
+                        }
+                        else
+                        {
+                            <a class="header-span" href="/Index/FindAuthor/@Model.AuthorId">
+                               Розміщено: @Model.AuthorName  @Model.AuthorLastName
+                            </a>
+                            <img src="~/Content/images/new-message-add-icon.png" onclick="sendMessage(@Model.AuthorId);" style="padding:5px;cursor:pointer;">
+                        }
+                    }
+                </p>
+            </div>
+            <div class="w3-container w3-red">
+                <p class="w3-opacity" style="padding:5px;" >Номер телефону- @Model.PhoneNumber ; Електронна адреса- @Model.Email; Адреса:  @Model.CountryName @Model.CityName @Model.StreetName @Model.Adresstext  </p>
+            </div>
+        </div>
+        <br>
+    </div>
+</div>
+
+<div class="row" style="margin:10px;">
+    @{
+        for (int i = 1; i <= Model.ImgCount; i++)
+        {
+            <div class="column">
+                <img src="@Model.ImgList[i-1].Data" style="width:100%; margin-bottom:5px; padding:5px;" onclick="openModal();currentSlide(@i)" class="hover-shadow cursor">
+            </div>
+        }
+    }
+</div>
+
+<div id="ModalDiv" class="modal">
+    <span class="close cursor" onclick="closeModal()">&times;</span>
+    <div class="modal-content">
+        @{ 
+            for (int i = 1; i <= Model.ImgCount; i++)
+            {
+                <div class="mySlides">
+                    <div class="numbertext">@i / @Model.ImgCount</div>
+                    <img src="@Model.ImgList[i-1].Data" style="width:100%">
+                </div>
+                }
+            }
+
+
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+        <div class="caption-container">
+            <p id="caption"></p>
+        </div>
+
+        @{
+            for (int i = 1; i <= Model.ImgCount; i++)
+            {
+                <div class="column">
+                    <img class="demo cursor" src="@Model.ImgList[i-1].Data" style="width:100%" onclick="currentSlide(@i)" alt="">
+                </div>
+            }
+        }
+
+
+    </div>
+</div>
+<div id="openModal" class="modalDialog">
+    <div>
+        <a href="#close" title="Close" id="messageModalClose" class="closeMessage">X</a>
+        <form id="messageModalForm">
+            <input type="hidden" value="@Model.CurrentUser.UserId" name="fromUserId" id="fromUserId">
+            <input type="hidden" value="@Model.CurrentUser.UserId" name="toUserId" id="toUserId">
+            
+            <ul class="form-style-1">
+                <li>
+                    <label>Заголовок:</label>
+                    <input type="text" name="header" class="field-long" />
+                </li>
+                <li>
+                    <label>Ваше повідомлення <span class="required">*</span></label>
+                    <textarea name="body" id="body" class="field-long field-textarea"></textarea>
+                </li>
+                <li>
+                    <input type="button" onclick="fromSubmit()" value="Надіслати" />
+                </li>
+            </ul>
+        </form>
+    </div>
+</div>
+<a href="#openModal" id="openModalReadWindow" style="display:none"></a>
+
+
+<script>
+    function sendMessage(toId)
+    {
+        if(toId != Model.CurrentUser.UserId)
+        {
+            var message = document.getElementById('openModalReadWindow');
+            {
+                var toUserId = document.getElementById('toUserId');
+                if(toUserId!= null)
+                {
+                    toUserId.value = toId;
+                    message.click();
+                }
+            }
+        }
+        else alert('Ви не можете надсилати собі повідомлення!');
+    }
+    function fromSubmit()
+    {
+            $.ajax({
+                url: '@Url.Action("SendMessage", "Comunication")',
+                type: 'post',
+                cache: false,
+                async: true,
+                data: $('#messageModalForm').serialize(),
+                success: function (result) {
+                }
+            });
+            var elem = document.getElementById('messageModalClose');
+            if(elem != null)
+            {
+                elem.click();
+            }
+    }
+
+function openModal() {
+    document.getElementById('ModalDiv').style.display = "block";
+}
+
+function closeModal() {
+    document.getElementById('ModalDiv').style.display = "none";
+}
+
+var slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("demo");
+  var captionText = document.getElementById("caption");
+  if (n > slides.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " active";
+  captionText.innerHTML = dots[slideIndex-1].alt;
+}
+</script>
+
+
+

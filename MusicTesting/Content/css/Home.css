@@ -1,0 +1,247 @@
+﻿        .container {
+            width: 1000px;
+            margin: 0 auto;
+        }
+
+        .header {
+            height: 80px;
+            width: inherit;
+        }
+
+        .content {
+            height: 1110px;
+            background-color: white;
+            width: inherit;
+        }
+
+        .content-header {
+            height: 40px;
+            width: inherit;
+        }
+
+        .content-body {
+            width: 960px;
+            height: 505px;
+            margin: 0 auto;
+            background-color: #efefef;
+            padding-top: 20px;
+        }
+
+        .footer {
+            height: 20px;
+            width: inherit;
+            background-color: #096ae0;
+        }
+
+        .body {
+            background-color: #b1f7f5;
+        }
+
+        .page-header-img {
+            background-repeat: no-repeat;
+            height: inherit;
+            width: inherit;
+        }
+
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            -webkit-animation-name: fadeIn; /* Fade in the background */
+            -webkit-animation-duration: 0.4s;
+            animation-name: fadeIn;
+            animation-duration: 0.4s;
+        }
+
+        /* Modal Content */
+        .modal-content {
+            margin: 0 auto;
+            background-color: #fefefe;
+            width: 600px;
+            -webkit-animation-name: slideIn;
+            -webkit-animation-duration: 0.4s;
+            animation-name: slideIn;
+            animation-duration: 0.4s;
+            margin-top: 40px;
+        }
+
+        /* The Close Button */
+        .close {
+            color: white;
+            float: right;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+            .close:hover,
+            .close:focus {
+                color: #000;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+        .modal-header {
+            padding: 12px 16px;
+            background-color: #096ae0;
+            color: white;
+            text-align: left;
+        }
+
+        .modal-body {
+            padding: 2px 16px;
+        }
+
+        .modalImage {
+            width: 568px;
+            height: 360px;
+        }
+
+        .home-btn {
+            width: 32px;
+            height: 32px;
+            position: relative;
+            left: 10px;
+            border: none;
+            margin-top: 5px;
+        }
+
+            .home-btn:hover {
+                color: blue;
+                cursor: pointer;
+            }
+.dropdown {
+    position: relative;
+    display: inline-block;
+    float: right;
+    margin-right: 5px;
+    margin-top: -35px;
+}
+
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 10px;
+    background-color: #f9f9f9;
+    min-width: 300px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    min-height: 400px;
+}
+
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.desc {
+    padding: 15px;
+    text-align: center;
+}
+
+        .info-arrow {
+             -webkit-transition: all 0.5s ease 0s;
+              -moz-transition: all 0.5s ease 0s;
+              -o-transition: all 0.5s ease 0s;
+              -ms-transition: all 0.5s ease 0s;
+              transition: all 0.5s ease 0s;
+              cursor:pointer;
+          }
+          
+          .info-arrow:hover {
+              -webkit-transform: rotate(-90deg);
+              -moz-transform: rotate(-90deg);
+              -ms-transform: rotate(-90deg);
+              -o-transform: rotate(-90deg);
+              transform: rotate(-90deg);
+              margin-right:5px;
+          }
+
+.animate-form{
+    top: 0px;
+    padding: 18px 6% 60px 6%;
+    margin: 0 0 35px 0;
+    background: rgb(247, 247, 247);
+    border: 1px solid rgba(147, 184, 189, 0.8);
+    -webkit-box-shadow: 0pt 2px 5px rgba(105, 108, 109, 0.7), 0px 0px 8px 5px rgba(208, 223, 226, 0.4) inset;
+    -moz-box-shadow: 0pt 2px 5px rgba(105, 108, 109, 0.7), 0px 0px 8px 5px rgba(208, 223, 226, 0.4) inset;
+    box-shadow: 0pt 2px 5px rgba(105,108,109,0.7), inset 0px 0px 8px 5px rgba(208,223,226,0.4);
+    -webkit-box-shadow: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+    .form-ancet{
+        text-align: left;
+        padding: 0;
+        margin: 10px;
+        font-family: Cambria, Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
+        background: #fff url(../images/bg.jpg) repeat top left;
+        font-weight: 400;
+        background-color: inherit;
+        font-size: 15px;
+        color: #1d3c41;
+    }
+    .input-ancet{
+    width: 92%;
+    margin-top: 4px;
+    padding: 10px 5px 10px 32px;
+    border: 1px solid rgb(178, 178, 178);
+    -webkit-appearance: textfield;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow: 0px 1px 4px 0px rgba(168, 168, 168, 0.6) inset;
+    -moz-box-shadow: 0px 1px 4px 0px rgba(168, 168, 168, 0.6) inset;
+    box-shadow: inset 0px 1px 4px 0px rgba(168,168,168,0.6);
+    -webkit-transition: all 0.2s linear;
+    -moz-transition: all 0.2s linear;
+    -o-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+    }
+    .label{
+    color: rgb(64, 92, 96);
+    position: relative;
+    text-align: left;
+    margin: 0;
+    padding: 0;
+    margin: 0 auto;
+    font-size:15px;
+    font-family: "Trebuchet MS","Myriad Pro",Arial,sans-serif;
+    }
+    
+    .p-form{
+        margin:inherit;
+    }
+            .save-btn{
+            width: 30%;
+            cursor: pointer;
+            background: rgb(61, 157, 179);
+            padding: 8px 5px;
+            font-family: "BebasNeueRegular","Arial Narrow",Arial,sans-serif;
+            color: #fff;
+            font-size: 24px;
+            border: 1px solid rgb(28, 108, 122);
+            margin-bottom: 10px;
+            text-shadow: 0px 1px 1px rgba(0,0,0,0.5);
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+            -webkit-box-shadow: 0px 1px 6px 4px rgba(0, 0, 0, 0.07) inset, 0px 0px 0px 3px rgb(254, 254, 254), 0px 5px 3px 3px rgb(210, 210, 210);
+            -moz-box-shadow: 0px 1px 6px 4px rgba(0, 0, 0, 0.07) inset, 0px 0px 0px 3px rgb(254, 254, 254), 0px 5px 3px 3px rgb(210, 210, 210);
+            box-shadow: inset 0px 1px 6px 4px rgba(0,0,0,0.07), 0px 0px 0px 3px rgb(254,254,254), 0px 5px 3px 3px rgb(210,210,210);
+            -webkit-transition: all 0.2s linear;
+            -moz-transition: all 0.2s linear;
+            -o-transition: all 0.2s linear;
+            transition: all 0.2s linear;
+            float:right;
+        }
+       

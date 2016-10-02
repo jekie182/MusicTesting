@@ -1,0 +1,15 @@
+﻿@{ 
+    ViewBag.Title = "Ancet";
+}
+@using MusicTesting.Models.ViewModel;
+@model PersonAncet
+
+<div id="avatarSwitcher">
+   @Html.Action("GetAvatarById", "Index", new { area = "", userId = Model.CurrentUser.UserId})
+</div>
+
+<div id="ancetRedactor">
+</div>
+
+
+

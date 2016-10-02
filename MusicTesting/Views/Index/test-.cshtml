@@ -1,0 +1,285 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Index</title>
+    <link href="~/Content/css/styleUser.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/css/Index.css" rel="stylesheet" type="text/css" />
+
+
+<script>
+        function btnAddReciveClick()
+        {
+            var table = document.getElementById('topTable');
+            if(table!=null)
+            {
+                table.className = 'table-display-none';
+            }
+            var form = document.getElementById('formRecive');
+            if (form != null && form.className != '')
+            {
+                form.className = '';
+            }
+            var modal = document.getElementById('myModal');
+            if (modal != null)
+                modal.style.display = "none";
+        }
+        function onSearchClick() {
+            var form = document.getElementById("formRecive");
+            if (form != null && form.className == '') {
+                form.className = 'formRecive';
+            }
+            var modal = document.getElementById('myModal');
+            if (modal != null)
+                modal.style.display = "none";
+        }
+
+        function showImage(data)
+        {
+            if(data!= null)
+            {
+                var modal = document.getElementById('myModal');
+                if(modal != null)
+                {
+                    modal.style.display = "block";
+                    img = document.getElementById('modalImage')
+                    if(img!= null)
+                    {
+                        img.src = data;
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="body">
+  <div class="container">
+      <div class="header">
+        <img src="~/Content/images/page-header.png" class="page-header-img"><img>
+      </div>
+
+      <div class="content">
+         <div class="content-header">
+              <button class="btn-add-recive" type="button" onclick="btnAddReciveClick()">
+                  Додати оголошення
+              </button>
+             
+              <input id="searchText" name="searchText" type="text" class="search-text-pad"/>   
+                
+              <img src="data:image/jpg;base64,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" 
+                   class="img-go-search" onclick="onSearchClick()">
+               
+             @{
+                 if (@Model.CurrentUser == null)
+                 {
+                    <button class="btn-add-recive" type="button" onclick="location.href='@Url.Action("Authorithation", "Index")'">
+                        Вхід
+                    </button>
+                 }
+                 else if (Model.CurrentUser != null)
+                 {
+                    <div class="dropdown">
+                        <img src="~/Content/images/person-info-arrow.png" alt="Info" width="32" height="32" class="info-arrow">
+                        <div class="dropdown-content">
+                            <div id="wrapper">
+
+                                <div id="header">
+                                    <div id="nav">
+                                        <a href='@Url.Action("Home", "Index")'>Анкета</a> |
+                                        <a href='@Url.Action("Message", "Index")'>Повідомлення</a> |
+                                        <a href='@Url.Action("MyNotice", "Index")'>Мої оголошення</a> |
+                                        <a href='@Url.Action("Balance", "Index")'>Баланс</a> |
+                                        <a href='@Url.Action("LogOut", "Index")'>Вихід</a>
+                                    </div>
+                                    <div id="bg"></div>
+                                </div>
+
+                                <div id="main-content">
+                                    <div id="left-column">
+                                        <div id="logo">
+                                            @Model.CurrentUser.UserInfoData.FirstName  @Model.CurrentUser.UserInfoData.LastName
+                                        </div>
+                                        <div class="box">
+                                            <h1>Мої контакти</h1>
+                                            <p>Електронна адреса та номер телефону: </p>
+                                            <ul style="margin-top:10px;">
+                                                <li>Моя пошта</li>
+                                                <li>@Model.CurrentUser.UserInfoData.Email</li>
+                                                <li>Мій номер</li>
+                                                <li>@Model.CurrentUser.UserInfoData.PhoneNumber</li>
+                                                <li>@Model.CurrentUser.UserInfoData.Adress</li>
+                                            </ul>
+                                        </div>
+                                        <h2>Мій баланс : @Model.CurrentUser.UserInfoData.Balane грн.</h2>
+                                        <p>
+                                            <img src="~/Content/images/money-icon.png" width="139" height="150" style="margin: 0 10px 10px 0;float:left;" />
+
+                                            <em></em> <br />
+                                            <em>
+                                                "Для поповнення балансу скорестайтесь пунктом меню Баланс. Для зміни особистий даних виберіть-Анкета. Для перегляду повідомлень-Повідомлення
+                                                Свої оголошення Ви можете переглянути в пункті меню-Мої оголошення"
+                                            </em><br />
+                                        </p>
+                                    </div>
+                                    <div id="right-column">
+                                        <div id="main-image">
+                                            @{
+                                                if (Model.CurrentUser.UserInfoData.Avatar == null || Model.CurrentUser.UserInfoData.Avatar == "")
+                                                {
+                                                    <img src="~/Content/images/non-avatar-image.png" width="160" height="188" />
+                                                }
+                                                else
+                                                {
+                                                    <img src="@Model.CurrentUser.UserInfoData.Avatar" width="160" height="188" />
+                                                }
+                                            }
+                                        </div>
+                                        <div class="sidebar">
+                                            <h3>Трохи про мене</h3>
+                                            <p>@Model.CurrentUser.UserInfoData.AboutMe</p>
+                                            <h3>Шукайте в соціалках</h3>
+                                            <div class="box">
+                                                <ul>
+                                                    <li><a href="http://facebook.com" target="_blank">Facebook</a></li>
+                                                    <li><a href="http://twitter.com" target="_blank">Twitter</a></li>
+                                                    <li><a href="http://linkedin.com" target="_blank">LinkedIn</a></li>
+                                                    <li><a href="http://tumblr.com" target="_blank">Tumblr</a></li>
+                                                    <li><a href="http://pinterest.com" target="_blank">Pinterest </a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                 }
+               } 
+          </div>
+
+
+          <form method="post" action="@Url.Action("PublicRecive", "Index")" enctype="multipart/form-data" autocomplete="on" id="formRecive" class="formRecive">
+                  <p class="paragraph">
+                      <label for="header" class="label-text"> Заголовок </label>
+                      <input id="header" class="label-input" name="header" required="required" type="text"/>
+                  </p>
+
+                  <p class="paragraph">
+                      <label for="paragraph" class="label-text"> Розділ </label>
+                      <select id="paragraph" class="label-input" name="paragraph" required="required" type="text">
+                          @foreach (var elem in @Model.ParagraphList)
+                          {
+                              <option value="@elem.Id">@elem.Name</option>
+                          }  
+                      </select>               
+                  </p>
+
+                  <p class="paragraph">
+                      <label for="reciveText" class="label-text"> Оголошення </label>
+                      <textarea id="reciveText" class="reciveText" name="reciveText" required ="required">
+                      </textarea>
+                  </p>
+
+                  <p class="paragraph">
+                      <label for="uploadImages" class="label-text"> Зображення </label>
+                      <input type="file" id="uploadImages" name="uploadImages" multiple="multiple" class="label-input" />
+                  </p>
+
+                  <p class="paragraph">
+                      <label for="phonenumber" class="label-text"> Контакти </label>
+                      <input id="phonenumber" class="label-input-contact" name="phonenumber"  type="tel" placeholder="phone number" />
+                      <input id="email" class="label-input-contact" name="email" type="email" placeholder="email" />
+                  </p>
+
+                  <p class="paragraph">
+                      <label for="location" class="label-text"> Де розмістити </label>
+                      <select id="location" class="label-input" name="location" required="required" type="text">                        
+                              @foreach (var elem in @Model.LocationList)
+                              {
+                                <option value="@elem.Id">@elem.Name</option>
+                              }                         
+                      </select>
+                  </p>
+                <button type="submit" class="submit-btn">Опублікувати</button>
+              </form>
+          
+          <div id="myModal" class="modal">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <span class="close">&times</span>
+                      <h2>Зображення</h2>
+                  </div>
+                  <div class="modal-body">
+                        <img src="" id="modalImage" class="modalImage">
+                  </div>
+
+              </div>
+          </div>
+          
+          <script>
+              var span = document.getElementsByClassName("close")[0];
+              span.onclick = function () {
+                  var modal = document.getElementById('myModal');
+                  if (modal != null) {
+                      clearModalImag();
+                      modal.style.display = "none";
+                  }
+              }
+              window.onclick = function (event) {
+                  var modal = document.getElementById('myModal');
+                  if (modal != null) {
+                      if (event.target == modal) {
+                          clearModalImag();
+                          modal.style.display = "none";
+                      }
+                  }
+              }
+              function clearModalImag()
+              {
+                  img = document.getElementById('modalImage')
+                  if (img != null) {
+                      img.src = '';
+                  }
+              }
+           </script>
+          
+          <table class="table" id="topTable">
+              <tbody>
+                  @foreach (var item in @Model.ReciveModelList)
+                  {
+                      <tr class="tr-recive">
+                          <td class="td-info">
+                              <a class="header-span" href="/Index/ViewRecive/@item.Id">
+                                   @item.Header
+                              </a>
+                              <span class="date-span">
+                                  Опубліковано: @item.PostedDate
+                              </span>
+                              <span class="location-span">
+                                  Місцезнаходження: @item.Location
+                              </span>
+                              <span class="location-span">
+                                  Поштова адреса: @item.Email  Мобільний: @item.PhoneNumber
+                              </span>
+                          </td>
+                          <td class="td-files">
+                              <div class="image-Slider">
+                                  @foreach (var image in @item.ImgList)
+                                  {
+                                    <img class="mySlides" src="@image.Data"  id="@item.Id" onclick="showImage('@image.Data')">
+                                  }
+                              </div>
+                          </td>
+
+                      </tr>
+                  }
+              </tbody>
+           </table>
+      
+      </div>
+      <div class="footer">
+
+      </div>
+   </div>
+</body>
+</html>

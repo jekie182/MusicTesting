@@ -1,0 +1,442 @@
+﻿@{ 
+    ViewBag.Title= "MyAdvertisement";
+}
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+          "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title></title>
+    <style type="text/css">
+        .cssguycomments {
+            background: #eee;
+            border: #ddd;
+            padding: 8px;
+            margin-bottom: 40px;
+        }
+
+            .cssguycomments p {
+                font: normal 12px/18px verdana;
+            }
+
+        a img {
+            border: 0;
+            vertical-align: text-bottom;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin-left:40px;
+            margin-top:40px;
+        }
+
+        th.side {
+            background: transparent url(../../Content/images/myadvertisement/bg_th_side.gif) no-repeat bottom left;
+        }
+
+        td.side {
+            text-align: right;
+            background: transparent url(../../Content/images/myadvertisement/bg_td_side.gif) no-repeat bottom left;
+            width: 180px;
+            font: bold 12px/15px verdana;
+            color: #6e6f37;
+            padding-right: 8px;
+        }
+
+        th {
+            height: 64px;
+            border-right: 1px solid #fff;
+            vertical-align: bottom;
+            color: #fff;
+            font: normal 21px/27px arial;
+            letter-spacing: 2px;
+            background: transparent url(../../Content/images/myadvertisement/bg_th.gif) no-repeat bottom left;
+        }
+
+        td {
+            text-align: center;
+            background: transparent url(../../Content/images/myadvertisement/bg_td.gif) no-repeat bottom left;
+            border-right: 1px solid #fff;
+            color: #fff;
+            width: 140px;
+            height: 40px;
+            font: bold 12px/18px verdana;
+        }
+
+            td.on {
+                background: transparent url(../../Content/images/myadvertisement/bg_td_on.gif) no-repeat bottom left;
+            }
+
+        th.on {
+            background: transparent url(../../Content/images/myadvertisement/bg_th_on.gif) no-repeat bottom left;
+            padding-bottom: 9px;
+            width: 148px;
+        }
+
+        tfoot td {
+            background: transparent url(../../Content/images/myadvertisement/bg_foot_td.gif) no-repeat top left;
+            height: 64px;
+            vertical-align: top;
+            padding-top: 8px;
+        }
+
+            tfoot td.on {
+                background: transparent url(../../Content/images/myadvertisement/bg_foot_td_on.gif) no-repeat top left;
+                padding-top: 16px;
+            }
+
+            tfoot td.side {
+                background: transparent url(../../Content/images/myadvertisement/bg_foot_td_side.gif) no-repeat top left;
+            }
+
+        #formcontainer {
+            width: 583px;
+            height: 900px;
+            background: transparent url(../../Content/images/myadvertisement/bg_form.gif) no-repeat top left;
+            position: absolute;
+            top: 34px;
+            background-size: 990px;
+            left: 381px;
+        }
+
+            #formcontainer form {
+                padding: 8px 10px;
+                margin: 0;
+            }
+
+            #formcontainer h2 {
+                margin: 0;
+                padding: 0 0 14px 0;
+                font: bold 21px/27px arial;
+                color: #fff;
+            }
+
+            #formcontainer fieldset {
+                border: none;
+                padding: 0;
+            }
+
+            #formcontainer label {
+                display: block;
+                float: left;
+                font: bold 12px/18px verdana;
+                color: #fff;
+                padding-bottom: 12px;
+            }
+
+                #formcontainer label.email {
+                    width: 350px;
+                }
+
+                    #formcontainer label.email input {
+                        width: 340px;
+                    }
+
+                #formcontainer label.password {
+                    clear: left;
+                    padding-right: 40px;
+                }
+
+                    #formcontainer label.password input,
+                    #formcontainer label.retype input {
+                        width: 150px;
+                    }
+
+            #formcontainer fieldset.buttons {
+                padding-top: 10px;
+                clear: left;
+            }
+
+        #prices {
+            position: relative;
+        }
+
+.tilt {
+  -webkit-transition: all 0.5s ease;
+     -moz-transition: all 0.5s ease;
+       -o-transition: all 0.5s ease;
+      -ms-transition: all 0.5s ease;
+          transition: all 0.5s ease;
+    }
+ 
+.tilt:hover {
+  -webkit-transform: rotate(-10deg);
+     -moz-transform: rotate(-10deg);
+       -o-transform: rotate(-10deg);
+      -ms-transform: rotate(-10deg);
+          transform: rotate(-10deg);
+          cursor:pointer;
+    }
+
+/* region css for the edit advertusement form*/
+.form-style-5{
+    max-width: 500px;
+    padding: 10px 20px;
+    background: #f4f7f8;
+    margin: 10px auto;
+    padding: 20px;
+    background: #f4f7f8;
+    border-radius: 8px;
+    font-family: Georgia, "Times New Roman", Times, serif;
+}
+.form-style-5 fieldset{
+    border: none;
+}
+.form-style-5 legend {
+    font-size: 1.4em;
+    margin-bottom: 10px;
+}
+.form-style-5 label {
+    display: block;
+    margin-bottom: 8px;
+}
+.form-style-5 input[type="text"],
+.form-style-5 input[type="date"],
+.form-style-5 input[type="datetime"],
+.form-style-5 input[type="email"],
+.form-style-5 input[type="number"],
+.form-style-5 input[type="search"],
+.form-style-5 input[type="time"],
+.form-style-5 input[type="url"],
+.form-style-5 textarea,
+.form-style-5 select {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    background: rgba(255,255,255,.1);
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    margin: 0;
+    outline: 0;
+    padding: 7px;
+    width: 100%;
+    box-sizing: border-box; 
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box; 
+    background-color: #e8eeef;
+    color:#8a97a0;
+    -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+    margin-bottom: 30px;
+    
+}
+.form-style-5 input[type="text"]:focus,
+.form-style-5 input[type="date"]:focus,
+.form-style-5 input[type="datetime"]:focus,
+.form-style-5 input[type="email"]:focus,
+.form-style-5 input[type="number"]:focus,
+.form-style-5 input[type="search"]:focus,
+.form-style-5 input[type="time"]:focus,
+.form-style-5 input[type="url"]:focus,
+.form-style-5 textarea:focus,
+.form-style-5 select:focus{
+    background: #d2d9dd;
+}
+.form-style-5 select{
+    -webkit-appearance: menulist-button;
+    height:35px;
+}
+.form-style-5 .number {
+    background: #1abc9c;
+    color: #fff;
+    height: 30px;
+    width: 30px;
+    display: inline-block;
+    font-size: 0.8em;
+    margin-right: 4px;
+    line-height: 30px;
+    text-align: center;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.2);
+    border-radius: 15px 15px 15px 0px;
+}
+
+.form-style-5 input[type="submit"],
+.form-style-5 input[type="button"]
+{
+    position: relative;
+    display: block;
+    padding: 19px 39px 18px 39px;
+    color: #FFF;
+    margin: 0 auto;
+    background: #1abc9c;
+    font-size: 18px;
+    text-align: center;
+    font-style: normal;
+    width: 100%;
+    border: 1px solid #16a085;
+    border-width: 1px 1px 3px;
+    margin-bottom: 10px;
+}
+.form-style-5 input[type="submit"]:hover,
+.form-style-5 input[type="button"]:hover
+{
+    background: #109177;
+}
+
+    </style>
+    <!-- because ie is a little different with its positioning... -->
+    <!--[if lte IE 8]>
+    <style type="text/css">
+    #formcontainer {
+        top:34px;
+    }
+    </style>
+    <![endif]-->
+    <script type="text/javascript">
+/*
+	For functions getElementsByClassName, addClassName, and removeClassName
+	Copyright Robert Nyman, http://www.robertnyman.com
+	Free to use if this text is included
+*/
+function getElementsByClassName(className, tag, elm){
+	var testClass = new RegExp("(^|\\s)" + className + "(\\s|$)");
+	var tag = tag || "*";
+	var elm = elm || document;
+	var elements = (tag == "*" && elm.all)? elm.all : elm.getElementsByTagName(tag);
+	var returnElements = [];
+	var current;
+	var length = elements.length;
+	for(var i=0; i<length; i++){
+		current = elements[i];
+		if(testClass.test(current.className)){
+			returnElements.push(current);
+		}
+	}
+	return returnElements;
+}
+
+function addClassName(elm, className){
+    var currentClass = elm.className;
+    if(!new RegExp(("(^|\\s)" + className + "(\\s|$)"), "i").test(currentClass)){
+        elm.className = currentClass + ((currentClass.length > 0)? " " : "") + className;
+    }
+    return elm.className;
+}
+
+function removeClassName(elm, className){
+    var classToRemove = new RegExp(("(^|\\s)" + className + "(\\s|$)"), "i");
+    elm.className = elm.className.replace(classToRemove, "").replace(/^\s+|\s+$/g, "");
+    return elm.className;
+}
+
+function hasClass(el, c) {
+  if (!el || !el.className.length) return;
+  var bits = el.className.split(' '), has = false;
+  for (var j = 0; j < bits.length; j++) if (bits[j] === c) has = true;
+  return has;
+}
+
+function activateThisColumn(column, advertisementId) {
+    //partial render of formconatiner with data
+    if(advertisementId != null)
+    {
+        loadCurrentAdvertisement(advertisementId);
+    }
+  var table = document.getElementById('pricetable');
+  var form = document.getElementById('formcontainer');
+
+  // first, remove the 'on' class from all other th's
+  var ths = table.getElementsByTagName('th');
+  for (var g=0; g<ths.length; g++) {
+    removeClassName(ths[g], 'on');
+    if (!hasClass(ths[g],'side')) {
+      ths[g].style.display = 'none';
+    }
+  }
+  // then, remove the 'on' class from all other td's
+  var tds = table.getElementsByTagName('td');
+  for (var m=0; m<tds.length; m++) {
+    removeClassName(tds[m], 'on');
+    if (!hasClass(tds[m],'side')) {
+      tds[m].style.display = 'none';
+    }
+  }
+
+  // now, add the class 'on' to the selected th
+  var newths = getElementsByClassName(column, 'th', table);
+  for (var h=0; h<newths.length; h++) {
+    addClassName(newths[h], 'on');
+    newths[h].style.display = '';
+    // not all browsers like display = 'block' for cells
+  }
+    // and finally, add the class 'on' to the selected td
+  var newtds = getElementsByClassName(column, 'td', table);
+  for (var i=0; i<newtds.length; i++) {
+    addClassName(newtds[i], 'on');
+    newtds[i].style.display = '';
+    // not all browsers like display = 'block' for cells
+  }
+    // show the form!
+  if (form != null)
+  {
+      form.style.display = 'block';
+  }
+}
+
+function hideTheForm() {
+	// get the form
+	var form = document.getElementById('formcontainer');
+	// hide the form
+	form.style.display = 'none';
+
+	// now get the hidden table cells and show them again
+	var table = document.getElementById('pricetable');
+	var tds = table.getElementsByTagName('td');
+	for (var i=0; i<tds.length; i++) {
+		tds[i].style.display = '';
+	}
+	var ths = table.getElementsByTagName('th');
+	for (var k=0; k<ths.length; k++) {
+		ths[k].style.display = '';
+	}
+}
+
+var currentAdvertisement = 0;
+
+function deleteAdvertisement(id) {
+    if (id != null) {
+        currentAdvertisement = id;
+        var r = confirm("Видалити запис?");
+        if (r == true) {
+            deleteRecord(id);
+        } else {
+            return false;
+        }
+    }
+}
+
+function deleteRecord(e) {
+            $.ajax({
+                url: '@Url.Action("DeleteMyAdvertisement", "Store")',
+                type: 'post',
+                cache: false,
+                async: true,
+                data: { advertisementId:  e },
+                success: function (result) {
+                    $('#pricetable').html(result);
+                }
+            });
+}
+        function loadCurrentAdvertisement(advertisementId)
+        {
+            $.ajax({
+                url: '@Url.Action("GetCurrentMyAdvertisement", "Store")',
+                type: 'post',
+                cache: false,
+                async: true,
+                data: { advertisementId: advertisementId },
+                success: function (result) {
+                    $('#currentAdvertisement').html(result);
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <div id="prices">
+        <div id="currentAdvertisement"></div>
+        @Html.Action("GetMyAdvertisementPage", "Store", new { area = "", userId = @Model.CurrentUser.UserId, page = 1 })
+    </div>
+</body>
+</html>

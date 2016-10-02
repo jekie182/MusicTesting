@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="10a5cd2b6929431383d4d155bc968301" Name="Diagram1" ZoomLevel="83">
+        <EntityTypeShape EntityType="MTDBModel.Adress" Width="1.5" PointX="1" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MTDBModel.City" Width="1.5" PointX="4.25" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MTDBModel.Country" Width="1.5" PointX="2.625" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MTDBModel.FeedBack" Width="1.5" PointX="9.625" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MTDBModel.Files" Width="1.5" PointX="4.25" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MTDBModel.OgContact" Width="1.5" PointX="2.625" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MTDBModel.OgLocation" Width="1.5" PointX="7.5" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MTDBModel.OgNotice" Width="1.5" PointX="1" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MTDBModel.Paragraph" Width="1.5" PointX="5.875" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MTDBModel.Person" Width="1.5" PointX="7.375" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MTDBModel.Street" Width="1.5" PointX="5.875" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MTDBModel.Users" Width="1.5" PointX="5.625" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MTDBModel.PersonBalance" Width="1.5" PointX="9.125" PointY="5.125" />
+        <EntityTypeShape EntityType="MTDBModel.Messages" Width="1.5" PointX="0.75" PointY="7.75" />
+        <EntityTypeShape EntityType="MTDBModel.Log" Width="1.5" PointX="3.375" PointY="7.75" />
+        <EntityTypeShape EntityType="MTDBModel.LogType" Width="1.5" PointX="5.125" PointY="7.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

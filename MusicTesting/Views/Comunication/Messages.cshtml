@@ -1,0 +1,188 @@
+﻿@{
+    ViewBag.Title = "Messages";
+}
+@using MusicTesting.Models.ViewModel;
+@model MessagesView
+<script>
+    function readMessage(messageId, fromId, toId, header, body, authorName) {
+        var toUserId = document.getElementById('modalMessagetoUserId')
+        if (toUserId != null) {
+            toUserId.value = fromId;
+        }
+
+        var head = document.getElementById('modalMessageHeader')
+        if (head != null) {
+            head.value = header
+        }
+
+        var mBody = document.getElementById('modalMessageBody')
+        if (mBody != null) {
+            mBody.value = body;
+        }
+
+        var read = document.getElementById('readMessageIcon ' + messageId);
+        if (read != null && (fromId != @Model.CurrentUser.UserId)) {
+            read.src = document.getElementById('hiddenSrcReadMessage').src;
+        }
+
+        var window = document.getElementById('openModalReadWindow');
+        if (window != null) {
+            window.click();
+        }
+
+        if (fromId != @Model.CurrentUser.UserId)
+        {
+            var reply = document.getElementById('modalMessaegReply');
+            if(reply!= null)
+            {
+                reply.style.visibility = 'visible';
+            }
+            var message = document.getElementById('messageModalForm');
+            if (message) {
+                message.click();
+                $.ajax({
+                    url: '@Url.Action("ReadMessage", "Comunication")',
+                    type: 'post',
+                    cache: false,
+                    async: true,
+                    data: { messagId: messageId },
+                    success: function (result) {
+                    }
+                });
+            }
+        }
+    }
+
+    function prepareMessageWindow()
+    {
+        var submit = document.getElementById('modalMessageSumbit')
+        if (submit != null)
+        {
+            submit.style.visibility = 'visible';
+         }
+        var reply = document.getElementById('modalMessaegReply')
+        if(reply!= null)
+        {
+            reply.style.visibility = 'hidden';
+        }
+
+        var head = document.getElementById('modalMessageHeader')
+        if (head != null) {
+            head.disabled = false;
+            head.value = '';
+        }
+        var mBody = document.getElementById('modalMessageBody')
+        if (mBody != null) {
+            mBody.disabled = false;
+            mBody.value = '';
+        }
+    }
+
+    function formSubmit() {
+
+        if (@Model.CurrentUser.UserId != document.getElementById('modalMessagetoUserId').value) {
+            $.ajax({
+                url: '@Url.Action("SendReplyMessage", "Comunication")',
+                data: $('#messageModalForm').serialize(),
+                success: function (result) {
+                    prepareMessageWindow();
+                    var close = document.getElementById('modalMessageClose');
+                    if (close)
+                        close.click();
+                    window.location.reload();
+                }
+            });
+        }
+        else alert('Ви не можете надсилати собі повіомлення');
+    }
+</script>
+
+    <section style="background:linear-gradient(to right, #25c481, #25b7c4);">
+        <!--for demo wrap-->
+        <div class="tbl-header">
+            <table cellpadding="0" cellspacing="0" border="0">
+                <thead>
+                    <tr>
+                        <th>In/Out</th>
+                        <th>Author</th>
+                        <th>Header</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="tbl-content">
+            <table cellpadding="0" cellspacing="0" border="0">
+                <tbody>
+                    @if (@Model.MessageList != null)
+                    {
+                        foreach (var item in @Model.MessageList)
+                        {
+                            <tr href="#openModal"; onclick="readMessage(@item.MessageId, 
+                                 @item.FromUserId,
+                                 @item.ToUserId,
+                                '@item.Header.Replace(System.Environment.NewLine, " ")',
+                                '@item.Body.Replace(System.Environment.NewLine, " ")',
+                                '@item.AuthorName')">
+                               <td>
+                                    @if (@item.IsRead)
+                                    {
+                                        <img src="~/Content/images/read-message.png" id="readMessageIcon @item.MessageId" class="info-arrow">
+                                    }
+                                    else
+                                    {
+                                        <img src="~/Content/images/new-in-message.png"  id="readMessageIcon @item.MessageId" class="info-arrow">
+                                    }
+
+                                @if (@item.FromUserId == @Model.CurrentUser.UserId)
+                                {
+                                   <img src="~/Content/images/message-out.png" class="info-arrow">
+                                }
+                                else
+                                {
+                                    <img src="~/Content/images/message-in.png" class="info-arrow">
+                                }
+                                </td>
+                                <td>
+                                    @item.AuthorName
+                                </td>
+                                <td>@item.Header</td>
+                                <td>@item.Date</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src="~/Content/js/message-index.js"></script>
+
+<img id="hiddenSrcReadMessage" src="~/Content/images/read-message.png" style="display:none;">
+<div id="openModal" class="modalDialog">
+    <div>
+        <a href="#close" title="Close"  id="modalMessageClose" class="close">X</a>
+        <form id="messageModalForm">
+            <ul class="form-style-1">
+                <li>
+                    <input type="hidden" value="@Model.CurrentUser.UserId" name="fromUserId" id="modalMessagefromUserId">
+                    <input type="hidden" value="@Model.CurrentUser.UserId" name="toUserId" id="modalMessagetoUserId">
+                    <input type="hidden" value="" name="fileDire" id="modalMessagefileDire">
+                    <label>Заголовок:</label>
+                    <input type="text" name="header" class="field-long"  disabled id="modalMessageHeader"/>
+                </li>
+                <li>
+                    <label>Ваше повідомлення <span class="required">*</span></label>
+                    <textarea name="body" id="modalMessageBody" class="field-long field-textarea" disabled ></textarea>
+                </li>
+                <li>
+                    <input onclick="formSubmit()" type="button" id="modalMessageSumbit" value="Надіслати"  style="visibility:hidden"/>
+                    <input type="button" value="Відповісти" id="modalMessaegReply" onclick="prepareMessageWindow()" style="visibility:hidden; float:right;" />
+                </li>
+            </ul>
+        </form>
+    </div>
+</div>
+<a href="#openModal" id="openModalReadWindow" style="display:none"></a>
+
+

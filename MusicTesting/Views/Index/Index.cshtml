@@ -1,0 +1,166 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<form method="post" action="@Url.Action("AddAdvertisment", "Index")" enctype="multipart/form-data" autocomplete="on" id="formRecive" class="formRecive">
+    <p class="paragraph">
+        <label for="header" class="label-text"> Заголовок </label>
+        <input id="header" class="label-input" name="header" required="required" type="text" />
+    </p>
+
+    <p class="paragraph">
+        <label for="paragraph" class="label-text"> Розділ </label>
+        <select id="paragraph" class="label-input" name="paragraph" required="required" type="text">
+            @foreach (var elem in @Model.ParagraphList)
+            {
+                <option value="@elem.Id">@elem.Name</option>
+            }
+        </select>
+    </p>
+
+    <p class="paragraph">
+        <label for="reciveText" class="label-text"> Оголошення </label>
+        <textarea id="reciveText" class="reciveText" name="reciveText" required="required"></textarea>
+    </p>
+
+    <p class="paragraph">
+        <label for="uploadImages" class="label-text"> Зображення </label>
+        <input type="file" id="uploadImages" name="uploadImages" multiple="multiple" class="label-input" />
+    </p>
+    @{ 
+        if (Model.CurrentUser == null) {
+    <p class="paragraph">
+        <label for="phonenumber" class="label-text"> Контакти </label>
+        <input id="phonenumber" class="label-input-contact" name="phonenumber" type="tel" placeholder="phone number" />
+        <input id="email" class="label-input-contact" name="email" type="email" placeholder="email" />
+    </p>
+            }
+        }
+    <p class="paragraph">
+        <label for="location" class="label-text"> Де розмістити </label>
+        <select id="location" class="label-input" name="location" required="required" type="text">
+            @foreach (var elem in @Model.LocationList)
+            {
+                <option value="@elem.Id">@elem.Name</option>
+            }
+        </select>
+    </p>
+    @{ 
+        if (Model.CurrentUser == null)
+        {
+    <p class="paragraph">
+        <label for="location" class="label-text"> Країна </label>
+        <select id="location" class="label-input" name="country" required="required" type="text">
+            @foreach (var elem in @Model.CountryList)
+            {
+                <option value="@elem.Id">@elem.Name</option>
+            }
+        </select>
+    </p>
+
+    <p class="paragraph">
+        <label for="location" class="label-text"> Місто </label>
+        <select id="location" class="label-input" name="city" required="required" type="text">
+            @foreach (var elem in @Model.CityList)
+            {
+                <option value="@elem.Id">@elem.Name</option>
+            }
+        </select>
+    </p>
+
+    <p class="paragraph">
+        <label for="location" class="label-text"> Вулиця </label>
+        <select id="location" class="label-input" name="street" required="required" type="text">
+            @foreach (var elem in @Model.StreetList)
+            {
+                <option value="@elem.Id">@elem.Name</option>
+            }
+        </select>
+    </p>
+
+    <p class="paragraph">
+        <label for="header" class="label-text"> Буд. № Кв. </label>
+        <input id="header" class="label-input" name="adressText" required="required" type="text" />
+    </p>
+            }
+        }
+  
+    <button  type="submit" class="submit-btn">Опублікувати</button>
+</form>
+
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header" style="padding:12px 16px; padding-bottom:26px; background-color: #096ae0;">
+            <span class="close">&times</span>
+        </div>
+        <div class="modal-body">
+            <img src="" id="modalImage" class="modalImage">
+        </div>
+
+    </div>
+</div>
+
+<table class="table" id="topTable">
+    <tbody>
+        @foreach (var item in @Model.ReciveModelList)
+        {
+            <tr class="tr-recive">
+                <td class="td-info">
+                    <a class="header-span" href="/Index/ViewAdvertisment/@item.Id">
+                        @item.Header
+                    </a>
+                    <span class="date-span">
+                        Опубліковано: @item.PostedDate
+                    </span>
+                    <span class="location-span">
+                        Місцезнаходження: @item.Location
+                    </span>
+                    <span class="location-span">
+                        Поштова адреса: @item.Email  Мобільний: @item.PhoneNumber
+                    </span>
+                </td>
+                <td class="td-files">
+                    <div class="image-Slider">
+                        @foreach (var image in @item.ImgList)
+                        {
+                            <img class="mySlides" src="@image.Data" id="@item.Id" onclick="showImage('@image.Data')">
+                        }
+                    </div>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    var span = document.getElementsByClassName("close")[0];
+    if (span != null) {
+        span.onclick = function () {
+            var modal = document.getElementById('myModal');
+            if (modal != null) {
+                clearModalImag();
+                modal.style.display = "none";
+            }
+        }
+        window.onclick = function (event) {
+            var modal = document.getElementById('myModal');
+            if (modal != null) {
+                if (event.target == modal) {
+                    clearModalImag();
+                    modal.style.display = "none";
+                }
+            }
+        }
+        function clearModalImag() {
+            img = document.getElementById('modalImage')
+            if (img != null) {
+                img.src = '';
+            }
+        }
+    }
+</script>
+
+

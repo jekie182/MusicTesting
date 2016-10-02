@@ -1,0 +1,68 @@
+﻿@using MusicTesting.Models.DataModel;
+@model IEnumerable<MyAdvertisementData>
+
+<table id="pricetable">
+        <thead>
+            <tr>
+                <th class="side">&nbsp;</th>          
+                @{
+                    foreach (MyAdvertisementData item in Model)
+                    {
+                        <th class="@item.ClassName">@item.Header</th>
+                    }
+                }
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <td class="side">&nbsp;</td>
+                @{
+                    foreach (MyAdvertisementData item in Model)
+                    {
+                       <td class="@item.ClassName" style="padding-top:0px;">
+                            <img src="~/Content/images/myadvertisement/choose.png" alt="Choose" onclick="activateThisColumn('@item.ClassName', '@item.Id')" class="tilt" />
+                            <img src="~/Content/images/myadvertisement/delete-my-advertisement-icon.png" alt="Choose" class="tilt" onclick="deleteAdvertisement('@item.Id')" />
+                       </td>
+                    }
+                }
+            </tr>
+        </tfoot>
+        <tbody>
+            <tr>
+                <td class="side">Номер оголошення</td>
+                @{
+                    foreach (MyAdvertisementData item in Model)
+                    {
+                        <td class="@item.ClassName">№ @item.Id</td>
+                    }
+                }
+            </tr>
+            <tr>
+                <td class="side">Розміщено "</td>
+                @{
+                    foreach (MyAdvertisementData item in Model)
+                    {
+                        <td class="@item.ClassName">@item.Location</td>
+                    }
+                }
+            </tr>
+            <tr>
+                <td class="side">Електронна адреса</td>
+                @{
+                    foreach (MyAdvertisementData item in Model)
+                    {
+                        <td class="@item.ClassName">@item.Email</td>
+                    }
+                }                
+            </tr>
+            <tr>
+                <td class="side">Дата оголошення</td>
+                @{
+                    foreach (MyAdvertisementData item in Model)
+                    {
+                        <td class="@item.ClassName">@item.Date</td>
+                    }
+                }  
+            </tr>
+        </tbody>
+    </table>

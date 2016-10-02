@@ -1,0 +1,230 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/css/styleUser.css" rel="stylesheet" type="text/css" />
+    @if (ViewBag.Title== "Index")
+    {
+        <link href="~/Content/css/Index.css" rel="stylesheet" type="text/css" />
+    }
+   
+    <link href="~/Content/css/Layout.css" rel="stylesheet" type="text/css" />
+   
+     @if (ViewBag.Title == "Home")
+    {
+        <link href="~/Content/css/Home.css" rel="stylesheet" type="text/css" />
+    }
+    
+    @if (ViewBag.Title == "Advertisement")
+    {
+        <link href="~/Content/css/Advertisement.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+        <link rel="stylesheet" href="~/Content/css/style-message.css">
+        <script src="~/Content/js/jquery-2.1.1.js"></script>
+        <script src="~/Content/js/jquery.unobtrusive-ajax.js"></script>
+    }
+    @if (ViewBag.Title == "MyAdvertisement")
+    {
+        <script src="~/Content/js/jquery-2.1.1.js"></script>
+        <script src="~/Content/js/jquery.unobtrusive-ajax.js"></script>
+    }
+    @if (ViewBag.Title == "Messages")
+    {
+        <link rel="stylesheet" href="~/Content/css/style-message.css">
+        <script src="~/Content/js/jquery-2.1.1.js"></script>
+        <script src="~/Content/js/jquery.unobtrusive-ajax.js"></script>
+    }
+    @if (ViewBag.Title == "Ancet")
+    {
+        <script src="~/Content/js/jquery-2.1.1.js"></script>
+        <script src="~/Content/js/jquery.unobtrusive-ajax.js"></script>
+    }
+
+@{
+    if (ViewBag.Title == "Index")
+    {
+        <script>
+        function btnAddReciveClick()
+        {
+            var table = document.getElementById('topTable');
+            if(table!=null)
+            {
+                table.className = 'table-display-none';
+            }
+            var form = document.getElementById('formRecive');
+            if (form != null && form.className != '')
+            {
+                form.className = '';
+            }
+            var modal = document.getElementById('myModal');
+            if (modal != null)
+                modal.style.display = "none";
+        }
+        function onSearchClick() {
+            var form = document.getElementById("formRecive");
+            if (form != null && form.className == '') {
+                form.className = 'formRecive';
+            }
+            var modal = document.getElementById('myModal');
+            if (modal != null)
+                modal.style.display = "none";
+        }
+        function showImage(data)
+        {
+            if(data!= null)
+            {
+                var modal = document.getElementById('myModal');
+                if(modal != null)
+                {
+                    modal.style.display = "block";
+                    img = document.getElementById('modalImage')
+                    if(img!= null)
+                    {
+                        img.src = data;
+                    }
+                }
+            }
+        }
+        </script>
+    }
+}
+
+</head>
+<body class="body">
+    <div class="container" style="width:1000px;">
+        <div class="header">
+            <img src="~/Content/images/page-header.png" class="page-header-img"><img>
+        </div>
+
+        <div class="content">
+            <div class="content-header">
+                <p style="text-align: left; margin-top:0px;">
+                    @{
+                        if (ViewBag.Title == "Index")
+                        {
+                            <button class="home-btn" onclick='btnAddReciveClick()'>
+                                <img src="~/Content/images/add_adversistment.png" alt="Add"
+                                     style="width: 32px; height: 32px; margin-left: -8px;">
+                            </button>
+                        }
+                        else 
+                        {
+                            <button class="home-btn" onclick="location.href='@Url.Action("Index", @"Index")'">
+                                <img src="~/Content/images/home_btn.png" alt="Home"
+                                     style="width: 32px; height: 32px; margin-left: -8px;">
+                            </button>
+                        }
+                    }
+                </p>
+                @{ 
+                    if (@Model.CurrentUser != null)
+                    {
+                <div class="dropdown">
+                    <img src="~/Content/images/person-info-arrow.png" alt="Info" width="32" height="32" class="info-arrow">
+                    <div class="dropdown-content">
+                        <div id="wrapper">
+
+                            <div id="header">
+                                <div id="nav">
+                                    <a href='@Url.Action("Ancet", "Index", new {userId = @Model.CurrentUser.UserId })'>Анкета</a> |
+                                    <a href='@Url.Action("GetMessages", "Comunication", new {userId = @Model.CurrentUser.UserId })'>Повідомлення</a> |
+                                    <a href='@Url.Action("MyAdvertisement", "Index")'>Мої оголошення</a> |
+                                    <a href='@Url.Action("Balance", "Index")'>Баланс</a> |
+                                    <a href='@Url.Action("LogOut", "Index")'>Вихід</a>
+                                </div>
+                                <div id="bg"></div>
+                            </div>
+
+                            <div id="main-content">
+                                <div id="left-column">
+                                    <div id="logo">
+                                        @Model.CurrentUser.UserInfoData.FirstName  @Model.CurrentUser.UserInfoData.LastName
+                                    </div>
+                                    <div class="box">
+                                        <h1>Мої контакти</h1>
+                                        <p>Електронна адреса та номер телефону: </p>
+                                        <ul style="margin-top:10px;">
+                                            <li>Моя пошта</li>
+                                            <li>@Model.CurrentUser.UserInfoData.Email</li>
+                                            <li>Мій номер</li>
+                                            <li>@Model.CurrentUser.UserInfoData.PhoneNumber</li>
+                                            <li>@Model.CurrentUser.UserInfoData.Adress</li>
+                                        </ul>
+                                    </div>
+                                    <h2>Мій баланс : @Model.CurrentUser.UserInfoData.Balane грн.</h2>
+                                    <p>
+                                        <img src="~/Content/images/money-icon.png" width="139" height="150" style="margin: 0 10px 10px 0;float:left;" />
+
+                                        <em></em> <br />
+                                        <em>
+                                            "Для поповнення балансу скорестайтесь пунктом меню Баланс. Для зміни особистий даних виберіть-Анкета. Для перегляду повідомлень-Повідомлення
+                                            Свої оголошення Ви можете переглянути в пункті меню-Мої оголошення"
+                                        </em><br />
+                                    </p>
+                                </div>
+                                <div id="right-column">
+                                    <div id="main-image">
+                                        @{
+                                            if (Model.CurrentUser.UserInfoData.Avatar == null || Model.CurrentUser.UserInfoData.Avatar == "")
+                                            {
+                                                <img src="~/Content/images/non-avatar-image.png" width="160" height="188" />
+                                            }
+                                            else
+                                            {
+                                                <img src="@Model.CurrentUser.UserInfoData.Avatar" width="160" height="188" />
+                                            }
+                                        }
+                                    </div>
+                                    <div class="sidebar">
+                                        <h3>Трохи про мене</h3>
+                                        <p>@Model.CurrentUser.UserInfoData.AboutMe</p>
+                                        <h3>Шукайте в соціалках</h3>
+                                        <div class="box">
+                                            <ul>
+                                                <li><a href="http://facebook.com" target="_blank">Facebook</a></li>
+                                                <li><a href="http://twitter.com" target="_blank">Twitter</a></li>
+                                                <li><a href="http://linkedin.com" target="_blank">LinkedIn</a></li>
+                                                <li><a href="http://tumblr.com" target="_blank">Tumblr</a></li>
+                                                <li><a href="http://pinterest.com" target="_blank">Pinterest </a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                     }
+                 else
+                    {
+                     <div class="dropdown">
+                        <img src="~/Content/images/login.jpg" alt="Info" width="32" height="32" class="info-arrow"
+                             onclick="location.href='@Url.Action("Authorithation", "Index")'">
+                     </div>
+                    }
+                }
+            </div>
+
+            @RenderBody()
+        </div>
+        <div class="footer">
+
+        </div>
+    </div>
+</body>
+</html>
+@if (ViewData["Message"] != null)
+{
+    <script language="javascript">
+            var modal = document.getElementById('myModal');
+            if (modal != null) {
+                modal.style.display = "block";
+                document.getElementById("errorText").innerHTML = '@ViewData["Message"]';
+            }
+    </script>
+}
+
+
+

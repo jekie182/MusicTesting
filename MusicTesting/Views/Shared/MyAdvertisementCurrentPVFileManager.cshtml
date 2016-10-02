@@ -1,0 +1,24 @@
+﻿@using MusicTesting.Models.ViewModel;
+@model MyAdvertisementCurrentPVFileManagerModel
+
+<div id="currentAdvertisementImageViewver">
+    <div id="page-wrap" style="height: 50px; width: 800px; position: absolute;left: -340px; top: 935px;">
+        @{if (@Model.ImageList != null && @Model.ImageList.Count > 0)
+            {
+                foreach (var item in @Model.ImageList)
+                {
+                    <a class="thumbnail" href="#thumb" id="@item.Id">
+                        <img src="@item.Data" style="width:60px; height: 49px; border:0px;" />
+                        <input type="image"
+                               alt="X"
+                               src="~/Content/images/myadvertisement/delete-image-icon.png"
+                               onclick="deleteImage('@item.Id', @Model.CurrentAdvertisemenId);" class="tilt" style="width: 16px;height: 16px;margin-left: -18px;margin-bottom: 30px;" />
+                        <span>
+                            <img src="@item.Data" style="height:256px; width:256px;" /><br />
+                        </span>
+                    </a>
+                }
+            }
+        }
+    </div>
+</div>

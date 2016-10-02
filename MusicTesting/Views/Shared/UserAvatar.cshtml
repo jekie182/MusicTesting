@@ -1,0 +1,60 @@
+﻿@using MusicTesting.Models.ViewModel
+@model UserAvatarView
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/avatar/css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="~/Content/avatar/js/fileinput.js" type="text/javascript"></script>
+    <script src="~/Content/avatar/js/fr.js" type="text/javascript"></script>
+    <script src="~/Content/avatar/js/es.js" type="text/javascript"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js" type="text/javascript"></script>
+</head>
+<body>
+    <div class="container kv-main" style="width:980px; margin-top:30px;">
+        <form enctype="multipart/form-data" method="post" action="@Url.Action("UpdateAvatarById", "Index")">
+            <div class="form-group">
+                <input id="file-4" type="file" class="file" data-upload-url="@Url.Action("UpdateAvatarById", "Index")" name="uploadImages">
+            </div>
+        </form>
+        <br>
+    </div>
+    <script>
+    $('#file-fr').fileinput({
+        language: 'fr',
+        uploadUrl: '#',
+        allowedFileExtensions : ['jpg', 'png','gif'],
+    });
+    $('#file-es').fileinput({
+        language: 'es',
+        uploadUrl: '#',
+        allowedFileExtensions : ['jpg', 'png','gif'],
+    });
+	$("#file-4").fileinput({
+		uploadExtraData: {kvId: '10'}
+	});
+    $(".btn-warning").on('click', function() {
+        if ($('#file-4').attr('disabled')) {
+            $('#file-4').fileinput('enable');
+        } else {
+            $('#file-4').fileinput('disable');
+        }
+    });
+    $(".btn-info").on('click', function() {
+        $('#file-4').fileinput('refresh', {previewClass:'bg-info'});
+    });
+    $(document).ready(function() {
+        $("#test-upload").fileinput({
+            'showPreview' : false,
+            'allowedFileExtensions' : ['jpg', 'png','gif'],
+            'elErrorContainer': '#errorBlock'
+        });
+    });
+    </script>
+</body>
+
+
+</html>

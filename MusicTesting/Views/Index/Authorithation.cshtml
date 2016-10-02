@@ -1,0 +1,266 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Authorithation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="html5, css3, form, switch, animation, :target, pseudo-class" />
+    <link rel="stylesheet" type="text/css" href="~/Content/css/demo.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/css/animate-custom.css" />
+    <style type="text/css">
+        .container {
+            width: 1000px;
+            margin: 0 auto;
+            background-color: #808080;
+        }
+
+        .header {
+            height: 80px;
+            width: inherit;
+        }
+
+        .content {
+            height: 640px;
+            background-color: white;
+            width: inherit;
+        }
+
+        .content-header {
+            height: 40px;
+            width: inherit;
+        }
+
+        .content-body {
+            width: 960px;
+            height: 505px;
+            margin: 0 auto;
+            background-color: #efefef;
+            padding-top: 20px;
+        }
+
+        .footer {
+            height: 20px;
+            width: inherit;
+            background-color: #096ae0;
+        }
+
+        .body {
+            background-color: #b1f7f5;
+        }
+
+        .page-header-img {
+            background-repeat: no-repeat;
+            height: inherit;
+            width: inherit;
+        }
+
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            -webkit-animation-name: fadeIn; /* Fade in the background */
+            -webkit-animation-duration: 0.4s;
+            animation-name: fadeIn;
+            animation-duration: 0.4s;
+        }
+
+        /* Modal Content */
+        .modal-content {
+            margin: 0 auto;
+            background-color: #fefefe;
+            width: 600px;
+            -webkit-animation-name: slideIn;
+            -webkit-animation-duration: 0.4s;
+            animation-name: slideIn;
+            animation-duration: 0.4s;
+            margin-top: 40px;
+        }
+
+        /* The Close Button */
+        .close {
+            color: white;
+            float: right;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+            .close:hover,
+            .close:focus {
+                color: #000;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+        .modal-header {
+            padding: 12px 16px;
+            background-color: #096ae0;
+            color: white;
+            text-align: left;
+        }
+
+        .modal-body {
+            padding: 2px 16px;
+        }
+
+        .modalImage {
+            width: 568px;
+            height: 360px;
+        }
+        .home-btn{
+            width: 32px;
+            height: 32px;
+            position: relative;
+            left: 10px;
+            border: none;
+            margin-top: 5px;
+        }
+        .home-btn:hover{
+            color:blue;
+            cursor: pointer;
+        }
+    </style>
+
+
+</head>
+
+<body class="body">
+    <div class="container">
+        <div class="header">
+            <img src="~/Content/images/page-header.png" class="page-header-img"><img>
+        </div>
+
+        <div class="content">
+            <div class="content-header">
+                <p style="text-align: left">
+                    <button class="home-btn" onclick="location.href='@Url.Action("Index", "Index")'">
+                        <img src="~/Content/images/home_btn.png" alt="Home"
+                             style="width: 32px; height: 32px; margin-left: -8px;">
+                    </button>
+                </p>
+            </div>
+
+            <div class="formRecive">
+                <section>
+                    <div id="container_demo">
+                        <!-- hidden anchor to stop jump http://www.css3create.com/Astuce-Empecher-le-scroll-avec-l-utilisation-de-target#wrap4  -->
+                        <a class="hiddenanchor" id="toregister"></a>
+                        <a class="hiddenanchor" id="tologin"></a>
+                        <div id="wrapper">
+
+                            @* login form *@
+                            <div id="login" class="animate form">
+                                <form method="post" action="@Url.Action("Login", "Index")" autocomplete="on">
+                                    <h1>Bхід</h1>
+                                    <p>
+                                        <label for="username" class="uname" data-icon="u"> Електронна адреса або Нік </label>
+                                        <input id="username" name="username" required="required" type="text" placeholder="username or email" />
+                                    </p>
+                                    <p>
+                                        <label for="password" class="youpasswd" data-icon="p"> Ваш пароль </label>
+                                        <input id="password" name="password" required="required" type="password" placeholder="password" />
+                                    </p>
+                                    <p class="keeplogin">
+                                        <input type="checkbox" name="loginkeeping" id="loginkeeping" value="loginkeeping" />
+                                        <label for="loginkeeping">Запамятати</label>
+                                    </p>
+                                    <p class="login button">
+                                        <input type="submit" value="Логін" />
+                                    </p>
+                                    <p class="change_link">
+                                        Ще не маєш акаунт у нас ?
+                                        <a href="#toregister" class="to_register">Приєднатись</a>
+                                    </p>
+                                </form>
+                            </div>
+                            @* registration form *@
+                            <div id="register" class="animate form">
+                                <form method="post" action="@Url.Action("Registration", "Index")" autocomplete="on">
+                                    <h1> Реєстрація </h1>
+                                    <p>
+                                        <label for="usernamesignup" class="uname" data-icon="u">Ваш нік</label>
+                                        <input id="usernamesignup" name="usernamesignup" required="required" type="text" placeholder="username" />
+                                    </p>
+                                    <p>
+                                        <label for="emailsignup" class="youmail" data-icon="e"> Ваша адреса</label>
+                                        <input id="emailsignup" name="emailsignup" required="required" type="email" placeholder="email" />
+                                    </p>
+                                    <p>
+                                        <label for="passwordsignup" class="youpasswd" data-icon="p">Ваш пароль </label>
+                                        <input id="passwordsignup" name="passwordsignup" required="required" type="password" placeholder="password" />
+                                    </p>
+                                    <p>
+                                        <label for="passwordsignup_confirm" class="youpasswd" data-icon="p">Повторіть пароль </label>
+                                        <input id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="password" />
+                                    </p>
+                                    <p class="signin button">
+                                        <input type="submit" value="Далі" />
+                                    </p>
+                                    <p class="change_link">
+                                        Маєте акаунт у Нас ?
+                                        <a href="#tologin" class="to_register"> Увійти </a>
+                                    </p>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+
+            <div id="myModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <span class="close">&times</span>
+                        <h2 id="errorText"></h2>
+                    </div>
+                </div>
+            </div>
+            <script>
+                var span = document.getElementsByClassName("close")[0];
+                span.onclick = function () {
+                    var modal = document.getElementById('myModal');
+                    if (modal != null) {
+                        modal.style.display = "none";
+                    }
+                }
+                window.onclick = function (event) {
+                    var modal = document.getElementById('myModal');
+                    if (modal != null) {
+                        if (event.target == modal) {
+                            modal.style.display = "none";
+                        }
+                    }
+                }
+            </script>
+
+
+        </div>
+        <div class="footer">
+
+        </div>
+    </div>
+</body>
+</html>
+@if (ViewData["Message"] != null)
+{
+    <script language="javascript">
+            var modal = document.getElementById('myModal');
+            if (modal != null) {              
+                modal.style.display = "block";
+                document.getElementById("errorText").innerHTML = '@ViewData["Message"]';
+            }
+    </script>
+}
+
